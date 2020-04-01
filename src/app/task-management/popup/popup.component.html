@@ -1,0 +1,48 @@
+<div class="header">
+  <h1>Task Form</h1>
+</div>
+
+<form [formGroup]="taskService.form" class="normal-form" (ngSubmit)="onFormSubmit()">
+  <mat-grid-list cols="2" rows="1" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="QuoteID">
+        <!-- <mat-form-field> -->
+          <input formControlName="QuoteType" matInput placeholder="Quote Type*">
+          <mat-error *ngIf="taskService.form.get('QuoteType').touched && taskService.form.get('QuoteType').invalid">This field is mandatory</mat-error>
+        <!-- </mat-form-field> -->
+        <br>
+        <!-- <mat-form-field> -->
+          <input formControlName="Contact" matInput placeholder="Contact*">
+          <mat-error *ngIf="taskService.form.get('Contact').touched && taskService.form.get('Contact').invalid">This field is mandatory</mat-error>
+        <!-- </mat-form-field> -->
+        <br>
+        <!-- <mat-form-field> -->
+          <input formControlName="Task" matInput #desc placeholder="Task Description*">
+          <mat-error *ngIf="taskService.form.get('Task').touched && taskService.form.get('Task').invalid">This field is mandatory</mat-error>
+          <mat-hint align="end">{{desc.value?.length || 0}}/1000</mat-hint>
+        <!-- </mat-form-field> -->
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <!-- <mat-form-field> -->
+          <input formControlName="DueDate" matInput [matDatepicker]="picker" class="date" placeholder="DueDate*">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="taskService.form.get('DueDate').touched && taskService.form.get('DueDate').invalid">This field is mandatory</mat-error>
+        <!-- </mat-form-field> -->
+        <br>
+        <!-- <mat-form-field> -->
+          <input formControlName="TaskType" matInput placeholder="Task Type*">
+          <mat-error *ngIf="taskService.form.get('TaskType').touched && taskService.form.get('TaskType').invalid">This field is mandatory</mat-error>
+        <!-- </mat-form-field> -->
+          <div class="button-row">
+            <button mat-raised-button color="primary" type="submit" [disabled]="taskService.form.invalid">Submit</button> &nbsp;
+            <button mat-raised-button color="warn" type="button" (click)="resetForm()">Clear</button>
+          </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
+

@@ -1,0 +1,61 @@
+<nav>
+  <div class="nav-wrapper">
+    <h1 class="brand-logo center">
+      Task Management</h1>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li>
+        <button type="button" class="logoutButton" (click)="Logout()">Logout</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class=container>
+  <div class="addTask">
+    <button mat-raised-button (click)="onCreate()">
+      <mat-icon>add</mat-icon>Create
+    </button>
+  </div>
+  <div class="search-div col-sm-9">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search here" class="searchBar" autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()"></button>
+     </div>
+  <div class="stickyTable mat-elevation-z8">
+    <mat-table [dataSource]="listData" matSort>
+      <ng-container matColumnDef="QuoteType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Quote Type</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.QuoteType}}</mat-cell>
+      </ng-container>
+      <!-- <ng-container matColumnDef="QuoteID">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Quote ID</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.QuoteID}}</mat-cell>
+      </ng-container> -->
+      <ng-container matColumnDef="Contact">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Contact</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.Contact}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Task">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Task</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.Task}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="DueDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Due Date</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.DueDate}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="TaskType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Task Type</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.TaskType}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-icon-button [routerLink]="['/details/' + row.QuoteID]"><mat-icon>remove_red_eye</mat-icon></button>
+          <button mat-icon-button (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="onDelete(row.QuoteID)"><mat-icon>delete_forever</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true" ></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator class="paginatorSticky" [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons ></mat-paginator>
+  </div>
+</div>

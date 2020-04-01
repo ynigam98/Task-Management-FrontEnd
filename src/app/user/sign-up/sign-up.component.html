@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col s8 offset-s2">
+    <form class="col s12 white" #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">email</i>
+          <label>Email</label>
+          <input class="validate" type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" [pattern]="emailPattern" required>
+          <label data-error="Invalid email!"></label>
+          <div *ngIf="Email.invalid && (userRegistrationForm.submitted || Email.touched)" class="alert alert-danger">
+            <div *ngIf="Email.errors.required" class="alert alert-danger"> Email is required. </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">vpn_key</i>
+          <label>Password</label>
+          <input class="validate" type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required  minlength="6" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{6,}">
+          <!-- <label [attr.data-error]="Password.errors!=null?(Password.errors.required?'Required field!':'Minimum 6 characters needed'):''">Password</label> -->
+          <div *ngIf="Password.invalid && (userRegistrationForm.submitted || Password.touched)" class="alert alert-danger">
+            <div *ngIf="Password.errors.required" class="alert alert-danger"> Password is required. </div>
+            <div *ngIf="Password.errors.pattern" class="alert alert-danger"> Must contain at least one number, one uppercase letter, one lowercase letter, one special character and at least 6 or more characters.</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">check_circle</i>
+          <label>Confirm Password</label>
+          <input class="validate" type="password" name="ConfirmPassword" #ConfirmPassword="ngModel" [(ngModel)]="user.ConfirmPassword" required  pattern="{{ Password.value }}">
+          <!-- <label [attr.data-error]="Password.errors!=null?(Password.errors.required?'Required field!':'Minimum 3 characters needed'):''">Password</label> -->
+          <div *ngIf=" ConfirmPassword.invalid && (userRegistrationForm.submitted || ConfirmPassword.touched)" class="alert alert-danger">
+            <div *ngIf="ConfirmPassword.errors.required" class="alert alert-danger"> Confirm password is required. </div>
+            <div *ngIf="ConfirmPassword.errors.pattern" class="alert alert-danger"> Password & Confirm Password does not match.</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <button [disabled]="!userRegistrationForm.valid" class="btn-large btn-submit" type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

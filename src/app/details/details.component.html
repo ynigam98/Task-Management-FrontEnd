@@ -1,0 +1,32 @@
+<nav>
+  <div class="nav-wrapper">
+    <button type="button" class="logoutButton" [routerLink]="['/task']" ><mat-icon>backspace</mat-icon> Back</button>
+    <h1 class="brand-logo center">
+      Task Details</h1>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li>
+        <button type="button" class="logoutButton" (click)="Logout()">Logout</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <table>
+    <tr>
+      <th>Quote Type</th>
+      <th>Quote#</th>
+      <th>Contact</th>
+      <th>Task</th>
+      <th>DueDate</th>
+      <th>Task Type</th>
+    </tr>
+    <tr>
+      <td>{{QuoteType}}</td>
+      <td>{{quoteid}}</td>
+      <td>{{Contact}}</td>
+      <td>{{Task}}</td>
+      <td>{{DueDate}}</td>
+      <td>{{TaskType}}</td>
+    </tr>
+  </table>
+</div>
